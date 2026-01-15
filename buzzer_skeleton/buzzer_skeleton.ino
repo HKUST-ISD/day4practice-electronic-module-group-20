@@ -32,6 +32,33 @@ void setup() {
 
 
 void loop() {
+    Serial.println("Playing F4...");
+    tone(BUZZER_PIN, NOTE_F4, 500);
+    delay(1000);
+    noTone(BUZZER_PIN);
+
+    Serial.println("Playing G4...");
+    tone(BUZZER_PIN, NOTE_G4, 500);
+    delay(1000);
+    noTone(BUZZER_PIN);
+
+    delay(1000);
+
+    Serial.println("Playing Jingle Bells...");
+    // Iterate over the notes of the melody:
+    for (int thisNote = 0; thisNote < 25; thisNote++) {
+       // To calculate the note duration, take one second divided by the note type.
+       int noteDuration = 1000 / noteDurations[thisNote];
+       tone(BUZZER_PIN, melody[thisNote], noteDuration);
+       // To distinguish the notes, set a minimum time between them.
+       int pauseBetweenNotes = noteDuration * 1.30;
+       delay(pauseBetweenNotes);
+       // Stop the tone playing:
+       noTone(BUZZER_PIN);
+    }
+    
+    delay(2000);
+
     /*
         "tone()" is a built-in Arduino function that plays a tone on a buzzer.
         Parameters:
@@ -51,7 +78,6 @@ void loop() {
     tone(?, ?, 500);
     delay(1000);
     noTone(BUZZER_PIN);
-
     Serial.println("Playing G4...");
     tone(?, ?, 500);
     delay(1000);
